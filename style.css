@@ -1,0 +1,140 @@
+.game-board {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    position: relative;
+    border: 2px solid #000;
+}
+
+.piece {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border-radius: 50%;
+    cursor: grab;
+    transition: all 1s ease;
+}
+
+#diceResult, #houseInfo, #cardsDisplay {
+    display: none;
+}
+
+.color-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ccc;
+    position: relative;
+}
+
+.card .card-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 0 0 10px 10px;
+}
+
+.card-category-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card-stack {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.card-stack .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 5px;
+}
+
+.no-cards {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+#endGameMessage {
+    display: none;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    animation: fade-in 1s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .game-board {
+        height: 300px;
+    }
+
+    .piece {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card {
+        width: 80px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        height: 200px;
+    }
+
+    .piece {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card {
+        width: 60px;
+        height: 100px;
+    }
+}
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+}

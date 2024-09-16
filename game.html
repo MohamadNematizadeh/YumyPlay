@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/logo new۱.png" type="image/x-icon">
+    <title>بازی تاس خوشمزه</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex items-center justify-center">
+    <div id="loginPage" class="w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
+        <img src="image/logo new۱.png" alt="لوگو" class="logo">
+        <h2 class="text-center text-xl font-bold mb-4">ورود به بازی تاس خوشمزه</h2>
+        <input type="text" id="usernameInput" class="w-full border rounded px-2 py-1 mb-4" placeholder="نام کاربری">
+        <button id="loginBtn" class="w-full bg-blue-500 text-white py-2 rounded">ورود</button>
+    </div>
+    <div id="colorPage" class="hidden w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
+        <h2 class="text-center text-xl font-bold mb-4">انتخاب رنگ مهره</h2>
+        <div class="flex justify-around">
+            <div class="color-box bg-red-500" data-color="red"></div>
+            <div class="color-box bg-green-500" data-color="green"></div>
+            <div class="color-box bg-blue-500" data-color="blue"></div>
+            <div class="color-box bg-yellow-500" data-color="yellow"></div>
+        </div>
+    </div>
+    <div id="gamePage" class="hidden w-full max-w-5xl p-4 bg-white rounded-lg shadow-lg">
+        <h2 id="greeting" class="text-center text-xl font-bold mb-4">خوش آمدید!</h2>
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-2/3 relative game-board">
+                <img src="image/صفحه بازی۲.jpg" alt="پس‌زمینه" class="w-full h-full rounded">
+                <div id="playerToken" class="piece"></div>
+            </div>
+            <div class="w-full md:w-1/3 pl-0 md:pl-4 flex flex-col items-center mt-4 md:mt-0">
+                <button id="rollDiceBtn" class="w-full bg-yellow-500 text-white py-2 rounded">پرتاب تاس</button>
+                <div id="diceResult" class="mt-4 text-lg font-bold"></div>
+                <div id="positionDisplay" class="mt-4 text-lg font-bold">مختصات مهره: (0, 0)</div>
+                <div id="houseInfo" class="mt-4 text-lg font-bold"></div>
+                <div id="cardsDisplay" class="mt-4 card-category-group"></div>
+            </div>
+        </div>
+    </div>
+    <div id="endGameMessage">بازی تمام شد! شما برنده شدید!</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
