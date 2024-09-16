@@ -9,8 +9,7 @@ YumyPlay website </h2>
   <p align="center" ><img src = "https://skillicons.dev/icons?i=html,css,tailwindcss,javascript"></p>
 
   <p align="center">
-
-  </p>
+    This delicious web dice game
     <br/>
     <br/>
     <a href="https://plantsai.ir/">View Demo</a>
