@@ -1,50 +1,320 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="image/logo new۱.png" type="image/x-icon">
-    <title>بازی تاس خوشمزه</title>
+    <title>تاس خوشمزه</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS styles for glass effect */
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .piece {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.3s;
+        }
+
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        button {
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #FFCA28;
+            transform: scale(1.05);
+        }
+
+        .wave-top {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: #FFD700;
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+        }
+
+        .wave-bottom {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: #FFD700;
+            border-top-left-radius: 50% 20px;
+            border-top-right-radius: 50% 20px;
+            margin-top: 50px;
+        }
+
+        .logo {
+            width: 100px;
+            margin: 0 auto 20px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Glass effect CSS */
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .piece {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.3s;
+        }
+
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        #endGameMessage {
+            display: none;
+            /* در ابتدا پنهان است */
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #000;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        #endGameMessage.hidden {
+            display: none;
+            /* پنهان کردن پیام */
+        }
+
+        .card {
+            width: 120px;
+            /* Adjusted width for smaller size */
+            height: 180px;
+            /* Adjusted height */
+            overflow: hidden;
+            /* Hide overflow */
+            position: relative;
+            /* For absolute positioning of images */
+            margin: 10px;
+            /* Margin for spacing */
+            border-radius: 8px;
+            /* Rounded corners */
+            transition: transform 0.2s ease;
+            /* Smooth transition on hover */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            /* Scale effect on hover */
+        }
+
+        .card img {
+            width: 100%;
+            /* Make image cover the card */
+            height: 100%;
+            /* Ensure full height */
+            object-fit: cover;
+            /* Cover while maintaining aspect ratio */
+            border-radius: 8px;
+            /* Rounded corners for images */
+        }
+
+        @keyframes sparkle {
+            0% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.5);
+            }
+
+            100% {
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(0);
+            }
+
+            25% {
+                transform: translate(-2px, 0);
+            }
+
+            50% {
+                transform: translate(2px, 0);
+            }
+
+            75% {
+                transform: translate(-2px, 0);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .logo {
+            width: 100px;
+            margin: 0 auto 20px;
+            animation: bounce 2s infinite, sparkle 1.5s infinite;
+            animation: shake 0.5s infinite alternate, sparkle 1.5s infinite;
+            /* Add shake and sparkle animations */
+        }
+
+
+        /* Mobile styles */
+        @media (max-width: 640px) {
+            .piece {
+                width: 40px;
+                /* Smaller size for mobile */
+                height: 40px;
+            }
+
+            #playerToken,
+            #aiToken {
+                display: block;
+                /* Show tokens in mobile view */
+            }
+
+            #rollDiceBtn {
+                width: 100%;
+                /* Full width on mobile */
+            }
+
+            .card {
+                width: 80px;
+                /* Smaller card size for mobile */
+                height: 120px;
+                /* Smaller height for mobile */
+            }
+
+            #endGameMessage {
+                width: 90%;
+                /* Full width for message on mobile */
+                font-size: 20px;
+                /* Smaller font size on mobile */
+            }
+
+            .card-container {
+                max-height: 400px;
+                /* ارتفاع حداکثر برای ناحیه کارت‌ها */
+                overflow-y: auto;
+                /* اجازه اسکرول عمودی */
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex items-center justify-center">
-    <div id="loginPage" class="w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
+<body class="bg-yellow-50 flex flex-col items-center justify-between min-h-screen">
+
+    <div class="wave-top"></div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="w-full max-w-md p-4 glass rounded-lg shadow-lg fade-in">
         <img src="image/logo new۱.png" alt="لوگو" class="logo">
-        <h2 class="text-center text-xl font-bold mb-4">ورود به بازی تاس خوشمزه</h2>
-        <input type="text" id="usernameInput" class="w-full border rounded px-2 py-1 mb-4" placeholder="نام کاربری">
-        <button id="loginBtn" class="w-full bg-blue-500 text-white py-2 rounded">ورود</button>
+        <h2 class="text-center text-3xl font-bold mb-4 text-yellow-600">ورود به بازی تاس خوشمزه</h2>
+        <input type="text" id="usernameInput"
+            class="w-full border border-yellow-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring focus:ring-yellow-400"
+            placeholder="نام کاربری">
+        <button id="loginBtn" class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600">ورود</button>
     </div>
-    <div id="colorPage" class="hidden w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
-        <h2 class="text-center text-xl font-bold mb-4">انتخاب رنگ مهره</h2>
+
+    <!-- Game Mode Selection Page -->
+    <div id="gameModePage" class="hidden w-full max-w-md p-4 glass rounded-lg shadow-lg fade-in">
+        <h2 class="text-center text-3xl font-bold mb-4 text-yellow-600">انتخاب حالت بازی</h2>
+        <button id="aiGameBtn" class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 mb-2">بازی با
+            هوش مصنوعی</button>
+    </div>
+
+    <!-- Color Selection Page -->
+    <div id="colorPage" class="hidden w-full max-w-md p-4 glass rounded-lg shadow-lg fade-in">
+        <h2 class="text-center text-3xl font-bold mb-4 text-yellow-600">انتخاب رنگ مهره</h2>
         <div class="flex justify-around">
             <div class="color-box bg-red-500" data-color="red"></div>
             <div class="color-box bg-green-500" data-color="green"></div>
             <div class="color-box bg-blue-500" data-color="blue"></div>
             <div class="color-box bg-yellow-500" data-color="yellow"></div>
         </div>
+        <button id="confirmColorBtn"
+            class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 mt-4">تأیید رنگ</button>
     </div>
-    <div id="gamePage" class="hidden w-full max-w-5xl p-4 bg-white rounded-lg shadow-lg">
-        <h2 id="greeting" class="text-center text-xl font-bold mb-4">خوش آمدید!</h2>
+
+    <!-- Game Page -->
+    <div id="gamePage" class="hidden w-full max-w-5xl p-4 glass rounded-lg shadow-lg">
+        <h2 id="greeting" class="text-center text-3xl font-bold mb-4 text-yellow-600">خوش آمدید!</h2>
         <div class="flex flex-col md:flex-row">
             <div class="w-full md:w-2/3 relative game-board">
-                <img src="image/صفحه بازی۲.jpg" alt="پس‌زمینه" class="w-full h-full rounded">
-                <div id="playerToken" class="piece"></div>
+                <img src="image/صفحه بازی۲.jpg" alt="پس‌زمینه" class="w-full h-full rounded-lg shadow-lg">
+                <div id="playerToken" class="piece bg-red-500"></div>
+                <div id="aiToken" class="piece bg-blue-500"></div>
             </div>
             <div class="w-full md:w-1/3 pl-0 md:pl-4 flex flex-col items-center mt-4 md:mt-0">
-                <button id="rollDiceBtn" class="w-full bg-yellow-500 text-white py-2 rounded">پرتاب تاس</button>
-                <div id="diceResult" class="mt-4 text-lg font-bold"></div>
-                <div id="positionDisplay" class="mt-4 text-lg font-bold">مختصات مهره: (0, 0)</div>
-                <div id="houseInfo" class="mt-4 text-lg font-bold"></div>
-                <div id="cardsDisplay" class="mt-4 card-category-group"></div>
+                <button id="rollDiceBtn"
+                    class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600">پرتاب تاس</button>
+                <div id="diceResult" class="mt-4 text-lg font-bold text-yellow-700"></div>
+                <div id="houseInfo" class="text-center mb-4"></div>
+                <div class="card-container flex flex-wrap justify-center overflow-auto max-h-96" id="cardsDisplay">
+                    <!-- کارت‌ها باید اینجا قرار بگیرند -->
+                </div>
+                <div id="endGameMessage" class="hidden"></div>
             </div>
         </div>
     </div>
-    <div id="endGameMessage">بازی تمام شد! شما برنده شدید!</div>
+
+    <!-- End Game Message -->
+    <div id="endGameMessage" class="hidden text-center text-3xl font-bold text-yellow-800 mt-4">بازی تمام شد! شما برنده
+        شدید!</div>
 
     <script src="script.js"></script>
+
+    <div class="wave-bottom"></div>
 </body>
 
 </html>
